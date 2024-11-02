@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Atul&Liliyya</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+        <link rel="icon" href="./img/logo.png" type="image/icon type">
+
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@400;500;600&family=Petit+Formal+Script&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+
+    <body data-bs-spy="scroll" data-bs-target="#navBar" id="weddingHome">
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar start -->
+            <div class="container-fluid sticky-top px-0">
+                <div class="container-fluid">
+                    <div class="container px-0">
+                        <nav class="navbar navbar-light navbar-expand-xl" id="navBar" >
+                            <a href="index.html" class="navbar-brand">
+                                <h4 class="text-primary display-6 fw-bold mb-0">Atul<strong class="text-secondary">&</strong>Liliyya</h4>
+                            </a>
+                            <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                                <span class="fa fa-bars text-primary"></span>
+                            </button>
+                            <div class="collapse navbar-collapse py-3" id="navbarCollapse">
+                                <div class="navbar-nav mx-auto border-top">
+                                    <a href="index.html" class="nav-item nav-link active" >Home</a>
+                                    <a href="index.html#aboutus" class="nav-item nav-link">About</a>
+                                    <a href="index.html#weddingStory" class="nav-item nav-link">Story</a>
+                                    <a href="index.html#weddingTimeline" class="nav-item nav-link">Timeline</a>
+                                    <a href="index.html#weddingGallery" class="nav-item nav-link">Gallery</a>
+                                    <a href="index.html#weddingMap" class="nav-item nav-link">Map</a>
+                                </div>
+                                <!-- <div class="d-flex align-items-center flex-nowrap pt-xl-0">
+                                    <a href="index.html#weddingRsvp" class="btn btn-primary btn-primary-outline-0 py-2 px-4 ms-4 "style="border-radius: 5px;">login</a>
+                                </div> -->
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        <!-- Navbar End -->
+
+
+
+<!-- Gallery Start -->
+<div class="container-fluid gallery position-relative py-5" id="weddingGallery">
+    <div class="position-absolute" style="top: -95px; right: 0;">
+        <img src="img/tamp-bg-1.png" class="img-fluid" alt="">
+    </div>
+    <div class="position-absolute" style="top: -80px; left: 0; transform: rotate(150deg);">
+        <img src="img/tamp-bg-1.png" class="img-fluid" alt="">
+    </div>
+    <div class="container position-relative py-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
+            <h1 class="display-2 text-dark">Gallery</h1>
+            <p class="fs-5 text-dark">Explore our cherished moments</p>
+        </div>
+        <!-- Gallery Items -->
+        <div class="row g-4" id="gallery-container">
+            <!-- Images will be inserted here by JavaScript -->
+        </div>
+        <!-- Pagination Controls -->
+        <div class="d-flex justify-content-center mt-4">
+            <button class="btn btn-primary me-2" onclick="prevPage()" style="color: #fff;">Previous</button>
+            <span id="page-indicator" class="pt-2"style="color: #000;">Page 1</span>
+            <button class="btn btn-primary ms-2" onclick="nextPage()"style="color: #fff;">Next</button>
+        </div>
+    </div>
+</div>
+<!-- Gallery End -->
+
+<script>
+    const totalImages = 34;
+    const imagesPerPage = 12;
+    let currentPage = 1;
+
+    function displayImages(page) {
+        const galleryContainer = document.getElementById('gallery-container');
+        galleryContainer.innerHTML = ''; // Clear existing images
+
+        // Calculate start and end indexes for images
+        const startIndex = (page - 1) * imagesPerPage + 1;
+        const endIndex = Math.min(page * imagesPerPage, totalImages);
+
+        for (let i = startIndex; i <= endIndex; i++) {
+            const col = document.createElement('div');
+            col.className = 'col-md-6 col-lg-4 col-xl-3 wow fadeInUp';
+            col.setAttribute('data-wow-delay', `${0.2 * (i % 4)}s`);
+
+            col.innerHTML = `
+                <div class="gallery-item">
+                    <div class="gallery-img">
+                        <img src="img/c${i}.jpg" alt="Image ${i}" loading="lazy">
+                        <div class="hover-style"></div>
+                        <div class="search-icon">
+                            <a href="img/c${i}.jpg" data-lightbox="Gallery-${page}" class="my-auto"><i class="fas fa-plus btn-primary btn-primary-outline-0 p-3"></i></a>
+                        </div>
+                    </div>
+                    <div class="gallery-overlay bg-light border-secondary border-top-0 p-4" style="border-style: double;">
+                        <h5>Special Moment</h5>
+                        <p class="text-dark mb-0">Cherished Memory</p>
+                    </div>
+                </div>
+            `;
+            galleryContainer.appendChild(col);
+        }
+
+        // Update page indicator
+        document.getElementById('page-indicator').innerText = `Page ${currentPage}`;
+    }
+
+    function nextPage() {
+        const totalPages = Math.ceil(totalImages / imagesPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            displayImages(currentPage);
+        }
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            displayImages(currentPage);
+        }
+    }
+
+    // Initialize gallery with the first page
+    displayImages(currentPage);
+
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    function animateOnScroll() {
+        const elements = document.querySelectorAll('.wow'); // Select all elements with the 'wow' class
+        const windowHeight = window.innerHeight;
+    
+        elements.forEach(element => {
+            const rect = element.getBoundingClientRect();
+            if (rect.top <= windowHeight && rect.bottom >= 0) {
+                // Element is in view
+                element.classList.add('animate'); // Add class to trigger CSS animation
+            }
+        });
+    }
+    
+    let ticking = false;
+    
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                animateOnScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    
+    // Initial check in case elements are already in view on page load
+    animateOnScroll();
+    
+</script>
+
+
+      
+        <!-- Footer Start -->
+        <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5 justify-content-center">
+                    <div class="col-lg-4 text-start">
+                        <div class="footer-item d-flex flex-column">
+                            <h4 class="mb-4 text-white">Links</h4>
+                            <a href="#aboutus" class="btn-link"> About</a>
+                            <a href="#weddingGallery" class="btn-link"> Gallery</a>
+                            <a href="#weddingStory" class="btn-link"> Story</a>
+                            <a href="#weddingTimeline" class="btn-link"> Timeline</a>
+                            <a href="#" class="btn-link"> Map</a>
+                            <!-- <a href="#" class="btn-link"> Contact Us</a> -->
+                            <!-- <a href="#" class="btn-link"> Wsedding-date</a> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <div class="footer-item">
+                            <h4 class="mb-4 text-white">Athul<strong class="text-primary">&</strong>Liliyya</h4>
+                            <p class="text-white">We are Athul and Liliyya, two souls with a shared journey that has led us to this wonderful moment. We invite you to join us in celebrating a love story filled with laughter, shared dreams, and countless cherished memories.</p>
+                            <!-- <div class="btn-link d-flex justify-content-center">
+                                <a href="#" class="btn btn-md-square btn-light btn-light-outline-0 me-2"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="btn btn-md-square btn-light btn-light-outline-0 me-2"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="btn btn-md-square btn-light btn-light-outline-0 me-2"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="btn btn-md-square btn-light btn-light-outline-0 me-0"><i class="fab fa-linkedin-in"></i></a>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-end">
+                        <div class="footer-item d-flex flex-column">
+                            
+                            <h4 class="my-4 text-white">Contact Us</h4>
+                            <!-- <a href="#" class="btn-link"><i class="fas fa-envelope text-secondary me-2"></i> info@example.com</a> -->
+                            <a href="#" class="btn-link"><i class="fas fa-phone text-secondary me-2"></i> (+012) 3456 7890 123</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        
+
+
+
+        <!-- Copyright Start -->
+        <div class="container-fluid copyright py-4">
+            <div class="container">
+                <div class="row g-4 align-items-center">
+                    <div class="col-md-6 text-center text-md-start mb-md-0">
+                        <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end text-white">
+                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
+                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
+                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
+                        Designed By <a class="border-bottom" href="tel:+91 8606526221">Alan VAttamala</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Copyright End -->
+
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+        
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    </body>
+
+</html>
